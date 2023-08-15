@@ -11,4 +11,5 @@ public interface EmployeeService {
 	public String deleteEmployee(Long employee);
 	public EmployeeDTO getEmployee(Long employeeId);
 	public List<EmployeeDTO> getAllEmployees();
+	public List<EmployeeDTO> getAllEmployeesWithPagination(int page, int size);
 }

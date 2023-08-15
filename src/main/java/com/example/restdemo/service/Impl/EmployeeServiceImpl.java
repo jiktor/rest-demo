@@ -7,6 +7,7 @@ import com.example.restdemo.repositories.EmployeeRepository;
 import com.example.restdemo.service.EmployeeService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -54,6 +55,16 @@ public class EmployeeServiceImpl implements EmployeeService {
 		List<Employee> list = employeeRepository.findAll();
 		List<EmployeeDTO> dtoList = new ArrayList<>();
 		for(Employee employee : list){
+			dtoList.add(modelMapper.map(employee,EmployeeDTO.class));
+		}
+		return dtoList;
+	}
+
+	@Override
+	public List<EmployeeDTO> getAllEmployeesWithPagination(int offset, int size) {
+		List<Employee> employeeList = employeeRepository.findAll(PageRequest.of(offset,size )).stream().toList();
+		List<EmployeeDTO> dtoList = new ArrayList<>();
+		for(Employee employee : employeeList){
 			dtoList.add(modelMapper.map(employee,EmployeeDTO.class));
 		}
 		return dtoList;

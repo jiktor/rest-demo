@@ -43,4 +43,11 @@ public class RestController {
 		employeeService.deleteEmployee(id);
 		return "deleted";
 	}
+	@GetMapping("/paging")
+	public ResponseEntity<List<EmployeeDTO>>getAllEmployeesWithPagination(
+			@RequestParam("offset") int offset,
+			@RequestParam("size") int size
+	){
+		return ResponseEntity.ok().body(employeeService.getAllEmployeesWithPagination(offset, size));
+	}
 }
